@@ -31,10 +31,20 @@ return {
         'filetype' },
       lualine_y = { 'progress' },
       lualine_z = {
-        function()
-          local now = os.date("*t")
-          return string.format("%02d:%02d", now.hour, now.min)
-        end
+        {
+          function()
+            local now = os.date("*t")
+            local hour = now.hour
+            local icon
+            if hour < 16 then
+              icon = ""
+            else
+              icon = ""
+            end
+            return string.format("%s %02d:%02d", icon, hour, now.min)
+          end,
+          color = { fg = "#78a9ff" }
+        }
       }
     },
   }
