@@ -29,7 +29,7 @@ return {
           color = { fg = "#78a9ff" },
         },
         'filetype' },
-      lualine_y = { 'progress' },
+      lualine_y = { 'location' },
       lualine_z = {
         {
           function()
