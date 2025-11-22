@@ -1,3 +1,19 @@
+vim.api.nvim_set_hl(0, "Clock_Color", {
+  fg = "#161616",
+  bg = "#78a9ff",
+})
+
+local clock_kiki = {
+  function()
+    local now = os.date("*t")
+    local hour = now.hour
+    local icon = (hour < 16) and "" or ""
+    return string.format("%s %02d:%02d", icon, hour, now.min)
+  end,
+  color = "Clock_Color",
+  separator = { left = "", right = "" },
+  padding = 1,
+}
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -30,22 +46,7 @@ return {
         },
         'filetype' },
       lualine_y = { 'location' },
-      lualine_z = {
-        {
-          function()
-            local now = os.date("*t")
-            local hour = now.hour
-            local icon
-            if hour < 16 then
-              icon = ""
-            else
-              icon = ""
-            end
-            return string.format("%s %02d:%02d", icon, hour, now.min)
-          end,
-          color = { fg = "#78a9ff" }
-        }
-      }
+      lualine_z = { clock_kiki }
     },
   }
 }
