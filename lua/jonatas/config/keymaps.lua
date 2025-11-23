@@ -46,11 +46,11 @@ vks("n", "<LEADER>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<LEFT><LEFT><LEFT>]], {
 vks("n", "<LEADER>x", "<CMD>!chmod u+x %<CR>", { desc = "makes file executable", silent = true })
 
 -- tab management
-vks("n", "<LEADER>to", "<CMD>tabnew<CR>")
-vks("n", "<LEADER>tx", "<CMD>tabclose<CR>")
-vks("n", "<LEADER>tn", "<CMD>tabn<CR>")
-vks("n", "<LEADER>tp", "<CMD>tabp<CR>")
-vks("n", "<LEADER>tt", "<CMD>tabnew %<CR>")
+vks("n", "<LEADER>to", "<CMD>tabnew<CR>", { desc = "new tab" })
+vks("n", "<LEADER>tx", "<CMD>tabclose<CR>", { desc = "close tab" })
+vks("n", "<LEADER>tn", "<CMD>tabn<CR>", { desc = "next tab" })
+vks("n", "<LEADER>tp", "<CMD>tabp<CR>", { desc = "previous tab" })
+vks("n", "<LEADER>tt", "<CMD>tabnew %<CR>", { desc = "open current file in new tab" })
 
 -- split management
 vks("n", "<LEADER>sv", "<C-w>v", { desc = "split window vertically" })
@@ -70,11 +70,17 @@ vks("n", "ok", "o<ESC>kO<ESC>j")
 vks("n", "oo", "A<CR>")
 
 -- exit vim
-vks("n", "tt", "<CMD>q<CR>")
-vks("n", "ty", "<CMD>w<CR>")
-vks("n", "tr", "<CMD>q!<CR>")
-vks("n", "tg", "<CMD>wq<CR>")
-vks("n", "tf", "<CMD>qa!<CR>")
+vks("n", "<LEADER>tt", "<CMD>q<CR>")
+vks("n", "<LEADER>ty", "<CMD>w<CR>")
+vks("n", "<LEADER>tr", "<CMD>q!<CR>")
+vks("n", "<LEADER>tg", "<CMD>wq<CR>")
+vks("n", "<LEADER>tf", "<CMD>qa!<CR>")
+
+-- redo
+vks("n", "U", "<C-R>")
+
+-- select all
+vks("n", "<C-a>", "GVgg")
 
 -- PLUGINS
 
