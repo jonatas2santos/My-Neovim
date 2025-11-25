@@ -37,5 +37,4 @@ op.sts = 2                           -- number of columns between two soft tab s
 op.si = true                         -- smart autoindenting for C programs
 op.ut = 50                           -- after this many milliseconds flush swap file
 op.hls = true                        -- highlight matches with last search pattern
--- op.colorcolumn = 80 -- columns to highlight
--- op.ea = true -- windows are automatically made the same size
+op.colorcolumn = "80"                -- columns to highlight

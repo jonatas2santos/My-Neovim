@@ -28,29 +28,30 @@ vks("v", "H", "<gv", opts)
 vks("v", "L", ">gv", opts)
 
 -- delete without copying
-vks({ "n", "v" }, "<LEADER>d", [["_d]])
+vks({ "n", "v" }, "<LEADER>d", [["_d]], { desc = "delete without copying" })
 
 -- quick exit from insert mode
 vks("i", "jk", "<ESC>")
 
 -- clear hlsearch
-vks("n", "<C-c>", "<CMD>nohl<CR>", { desc = "clear hl search", silent = true })
+vks("n", "<C-c>", "<CMD>nohl<CR>", { desc = "clear search hl", silent = true })
 
 -- delete character without copying
 vks("n", "x", '"_x', opts)
 
 -- replace word over cursor globally
-vks("n", "<LEADER>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<LEFT><LEFT><LEFT>]], { desc = "replace word cursor globally" })
+vks("n", "<LEADER>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<LEFT><LEFT><LEFT>]],
+  { desc = "replace word cursor is on globally" })
 
 -- make file executable
 vks("n", "<LEADER>x", "<CMD>!chmod u+x %<CR>", { desc = "makes file executable", silent = true })
 
 -- tab management
-vks("n", "<LEADER>to", "<CMD>tabnew<CR>", { desc = "new tab" })
-vks("n", "<LEADER>tx", "<CMD>tabclose<CR>", { desc = "close tab" })
-vks("n", "<LEADER>tn", "<CMD>tabn<CR>", { desc = "next tab" })
-vks("n", "<LEADER>tp", "<CMD>tabp<CR>", { desc = "previous tab" })
-vks("n", "<LEADER>tt", "<CMD>tabnew %<CR>", { desc = "open current file in new tab" })
+vks("n", "<LEADER>ao", "<CMD>tabnew<CR>", { desc = "new tab" })
+vks("n", "<LEADER>ax", "<CMD>tabclose<CR>", { desc = "close tab" })
+vks("n", "<LEADER>an", "<CMD>tabn<CR>", { desc = "next tab" })
+vks("n", "<LEADER>ap", "<CMD>tabp<CR>", { desc = "previous tab" })
+vks("n", "<LEADER>ac", "<CMD>tabnew %<CR>", { desc = "open current file in new tab" })
 
 -- split management
 vks("n", "<LEADER>sv", "<C-w>v", { desc = "split window vertically" })

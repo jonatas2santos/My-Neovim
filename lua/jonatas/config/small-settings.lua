@@ -1,4 +1,4 @@
--- LSP
+-- diagnostic icons
 vim.diagnostic.config({
   virtual_text = true,
   signs = {
@@ -13,5 +13,7 @@ vim.diagnostic.config({
 
 -- COLORIZER
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-  command = ":ColorizerAttachToBuffer",
+  callback = function()
+    vim.cmd("ColorizerAttachToBuffer")
+  end
 })

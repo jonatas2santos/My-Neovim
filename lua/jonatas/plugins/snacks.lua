@@ -9,7 +9,7 @@ return {
     -- refer to the configuration section below
     bigfile = { enabled = true },
     dashboard = { enabled = true },
-    explorer = { enabled = true },
+    explorer = { enabled = false },
     indent = { enabled = true },
     input = { enabled = true },
     picker = { enabled = true },
@@ -30,7 +30,10 @@ return {
     { "<leader>sw", function() Snacks.picker.grep_word() end,                               desc = "Visual selection or word", mode = { "n", "x" } },
     { "<leader>sk", function() Snacks.picker.keymaps() end,                                 desc = "Keymaps" },
     { "<leader>gb", function() Snacks.picker.git_branches() end,                            desc = "Git Branches" },
-    { "<leader>sh", function() Snacks.picker.help() end,                                    desc = "Help Pages" },
+    { "<leader>fh", function() Snacks.picker.help() end,                                    desc = "Help Pages" },
     { "<leader>si", function() Snacks.picker.icons() end,                                   desc = "Icons" },
+    { "<leader>bb", function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
+    { "<leader>bd", function() Snacks.bufdelete() end,                                      desc = "Delete Buffer" },
+    { "<leader>/",  function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
   },
 }
