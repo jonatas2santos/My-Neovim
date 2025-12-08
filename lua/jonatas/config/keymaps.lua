@@ -85,6 +85,18 @@ vks("n", "<C-a>", "GVgg")
 
 -- PLUGINS
 
+-- molten
+vks("n", "<LEADER>mi", "<CMD>MoltenInit<CR>", { desc = "Init Molten", silent = true })
+vks("n", "<LEADER>me", "<CMD>MoltenEvaluateOperator<CR>", { desc = "evaluate operator", silent = true })
+vks("n", "<LEADER>ms", "<CMD>noautocmd MoltenEnterOutput<CR>", { desc = "open output window", silent = true })
+vks("n", "<LEADER>mr", "<CMD>MoltenReevaluateCell<CR>", { desc = "re-eval cell", silent = true })
+vks("v", "<LEADER>mv", "<CMD><C-u>MoltenEvaluateVisual<CR>gv", { desc = "execute visual selection", silent = true })
+vks("n", "<LEADER>mh", "<CMD>MoltenHideOutput<CR>", { desc = "close output window", silent = true })
+vks("n", "<LEADER>md", "<CMD>MoltenDelete<CR>", { desc = "delete Molten cell", silent = true })
+
+-- if you work with html outputs:
+vks("n", "<LEADER>mx", "<CMD>MoltenOpenInBrowser<CR>", { desc = "open output in browser", silent = true })
+
 -- oil
 vks("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 vks("n", "<LEADER>-", "<CMD>Oil --float<CR>", { desc = "Open parent directory (float mode)" })
@@ -127,6 +139,22 @@ vks("n", "<leader>ql", function() require("persistence").load({ last = true }) e
 
 -- stop Persistence => session won't be saved on exit
 vks("n", "<leader>qd", function() require("persistence").stop() end)
+
+-- quarto
+local ok, runner = pcall(require, "quarto.runner")
+if not ok then
+  return
+end
+
+vks("n", "<leader>qp", "<CMD>QuartoPreview<CR>", { desc = "quarto preview", silent = true, noremap = true })
+vks("n", "<LEADER>qc", runner.run_cell,  { desc = "run cell", silent = true })
+vks("n", "<LEADER>qa", runner.run_above, { desc = "run cell and above", silent = true })
+-- vks("n", "<LEADER>qA", runner.run_all,   { desc = "run all cells", silent = true })
+vks("n", "<LEADER>ql", runner.run_line,  { desc = "run line", silent = true })
+vks("v", "<LEADER>qs",  runner.run_range, { desc = "run visual range", silent = true })
+vks("n", "<LEADER>qA", function()
+  runner.run_all(true)
+end, { desc = "run all cells of all languages", silent = true })
 
 -- AUTOCMDS
 
