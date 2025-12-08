@@ -31,14 +31,37 @@ return {
 
   -- lsp configs
   {
-    vim.lsp.config('lua_ls', {
-      settings = {
-        ['Lua'] = {
-          diagnostics = {
-            globals = { "vim" },
+    "neovim/nvim-lspconfig",
+    config = function()
+      -- Lua ls
+      vim.lsp.config("lua_ls", {
+        cmd = { "/usr/sbin/lua-language-server" },
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+              workspace = { checkThirdParty = false },
+            },
           },
         },
-      },
-    })
-  }
+      })
+
+      -- Python PyLSP
+      vim.lsp.config("pylsp", {
+        settings = {
+          pylsp = {
+            plugins = {
+              pycodestyle = { maxLineLength = 88 },
+              pylint = { enabled = false },
+            },
+          },
+        },
+      })
+
+      -- Ruff (LSP standalone)
+      vim.lsp.config("ruff", {
+        settings = {},
+      })
+    end,
+  },
 }

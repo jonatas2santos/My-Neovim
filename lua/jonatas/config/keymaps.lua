@@ -87,6 +87,7 @@ vks("n", "<C-a>", "GVgg")
 
 -- molten
 vks("n", "<LEADER>mi", "<CMD>MoltenInit<CR>", { desc = "Init Molten", silent = true })
+vks("n", "<LEADER>ml", "<CMD>MoltenEvaluateLine<CR>", { desc = "Molten line", silent = true })
 vks("n", "<LEADER>me", "<CMD>MoltenEvaluateOperator<CR>", { desc = "evaluate operator", silent = true })
 vks("n", "<LEADER>ms", "<CMD>noautocmd MoltenEnterOutput<CR>", { desc = "open output window", silent = true })
 vks("n", "<LEADER>mr", "<CMD>MoltenReevaluateCell<CR>", { desc = "re-eval cell", silent = true })
@@ -96,6 +97,62 @@ vks("n", "<LEADER>md", "<CMD>MoltenDelete<CR>", { desc = "delete Molten cell", s
 
 -- if you work with html outputs:
 vks("n", "<LEADER>mx", "<CMD>MoltenOpenInBrowser<CR>", { desc = "open output in browser", silent = true })
+
+-- move between cells
+vks("n", "]c", function()
+  vim.fn.search("^# %%", "W")
+end)
+
+vks("n", "[c", function()
+  vim.fn.search("^# %%", "bW")
+end)
+
+-- inner cell (ic)
+vks("o", "ic", function() 
+  local start = vim.fn.search("^# %%", "bnW")
+  local finish = vim.fn.search("^# %%", "nW")
+
+  if start == 0 or finish == 0 then
+    return
+  end
+
+  vim.cmd("normal! " .. start + 1 .. "GV" .. finish -1 .. "G")
+end, { silent = true })
+
+
+vks("x", "ic", function() 
+  local start = vim.fn.search("^# %%", "bnW")
+  local finish = vim.fn.search("^# %%", "nW")
+
+  if start == 0 or finish == 0 then
+    return
+  end
+
+  vim.cmd("normal! " .. start + 1 .. "GV" .. finish -1 .. "G")
+end, { silent = true })
+
+-- all cell (ac)
+vks("o", "e", function() 
+  local start = vim.fn.search("^# %%", "bnW")
+  local finish = vim.fn.search("^# %%", "nW")
+
+  if start == 0 or finish == 0 then
+    return
+  end
+
+  vim.cmd("normal! " .. start + 1 .. "GV" .. finish -1 .. "G")
+end, { silent = true })
+
+vks("x", "e", function() 
+  local start = vim.fn.search("^# %%", "bnW")
+  local finish = vim.fn.search("^# %%", "nW")
+
+  if start == 0 or finish == 0 then
+    return
+  end
+
+  vim.cmd("normal! " .. start + 1 .. "GV" .. finish -1 .. "G")
+end, { silent = true })
 
 -- oil
 vks("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
@@ -156,56 +213,3 @@ vks("n", "<LEADER>qA", function()
   runner.run_all(true)
 end, { desc = "run all cells of all languages", silent = true })
 
--- AUTOCMDS
-
--- copy the current file path.
-vks("n", "<LEADER>fp", function()
-  local filePath = vim.fn.expand("%:~")
-  vim.fn.setreg("+", filePath)
-  print("file path copied to clipboard: " .. filePath)
-end, { desc = "copy file path to clipboard" })
-
--- visual highlighting when copying text
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "highlight when yanking text",
-  group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
-
--- open help in vertical split
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "help",
-  command = "wincmd L",
-})
-
--- auto resize splits
-vim.api.nvim_create_autocmd("VimResized", {
-  command = "wincmd =",
-})
-
--- no auto continue comments on new line
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("no_auto_comment", {}),
-  callback = function()
-    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
-  end,
-})
-
--- show cursorline only in active window
--- enable
-vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
-  group = vim.api.nvim_create_augroup("active_cursorline", { clear = true }),
-  callback = function()
-    vim.opt_local.cursorline = true
-  end,
-})
-
--- disable
-vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
-  group = "active_cursorline",
-  callback = function()
-    vim.opt_local.cursorline = false
-  end,
-})
