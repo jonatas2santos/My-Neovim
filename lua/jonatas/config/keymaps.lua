@@ -85,6 +85,22 @@ vks("n", "<C-a>", "GVgg")
 
 -- PLUGINS
 
+-- Formatter
+vks("n", "<LEADER>fr", function()
+  vim.lsp.buf.format({ async = true })
+end, { desc = "Format Buffer with Ruff" })
+
+-- Ruff (pyproject.toml)
+-- [tool.ruff]
+-- line-lenght = 120
+--
+-- [tool.ruff.lint]
+-- ignore = ["E501"]
+--
+-- [tool.ruff.format]
+-- quote-style = "double"
+-- indent-style = "space"
+
 -- molten
 vks("n", "<LEADER>mi", "<CMD>MoltenInit<CR>", { desc = "Init Molten", silent = true })
 vks("n", "<LEADER>ml", "<CMD>MoltenEvaluateLine<CR>", { desc = "Molten line", silent = true })
@@ -108,7 +124,7 @@ vks("n", "[c", function()
 end)
 
 -- inner cell (ic)
-vks("o", "ic", function() 
+vks("o", "ic", function()
   local start = vim.fn.search("^# %%", "bnW")
   local finish = vim.fn.search("^# %%", "nW")
 
@@ -116,11 +132,11 @@ vks("o", "ic", function()
     return
   end
 
-  vim.cmd("normal! " .. start + 1 .. "GV" .. finish -1 .. "G")
+  vim.cmd("normal! " .. start + 1 .. "GV" .. finish - 1 .. "G")
 end, { silent = true })
 
 
-vks("x", "ic", function() 
+vks("x", "ic", function()
   local start = vim.fn.search("^# %%", "bnW")
   local finish = vim.fn.search("^# %%", "nW")
 
@@ -128,11 +144,11 @@ vks("x", "ic", function()
     return
   end
 
-  vim.cmd("normal! " .. start + 1 .. "GV" .. finish -1 .. "G")
+  vim.cmd("normal! " .. start + 1 .. "GV" .. finish - 1 .. "G")
 end, { silent = true })
 
 -- all cell (ac)
-vks("o", "e", function() 
+vks("o", "e", function()
   local start = vim.fn.search("^# %%", "bnW")
   local finish = vim.fn.search("^# %%", "nW")
 
@@ -140,10 +156,10 @@ vks("o", "e", function()
     return
   end
 
-  vim.cmd("normal! " .. start + 1 .. "GV" .. finish -1 .. "G")
+  vim.cmd("normal! " .. start + 1 .. "GV" .. finish - 1 .. "G")
 end, { silent = true })
 
-vks("x", "e", function() 
+vks("x", "e", function()
   local start = vim.fn.search("^# %%", "bnW")
   local finish = vim.fn.search("^# %%", "nW")
 
@@ -151,7 +167,7 @@ vks("x", "e", function()
     return
   end
 
-  vim.cmd("normal! " .. start + 1 .. "GV" .. finish -1 .. "G")
+  vim.cmd("normal! " .. start + 1 .. "GV" .. finish - 1 .. "G")
 end, { silent = true })
 
 -- oil
@@ -204,12 +220,11 @@ if not ok then
 end
 
 vks("n", "<leader>qp", "<CMD>QuartoPreview<CR>", { desc = "quarto preview", silent = true, noremap = true })
-vks("n", "<LEADER>qc", runner.run_cell,  { desc = "run cell", silent = true })
+vks("n", "<LEADER>qc", runner.run_cell, { desc = "run cell", silent = true })
 vks("n", "<LEADER>qa", runner.run_above, { desc = "run cell and above", silent = true })
 -- vks("n", "<LEADER>qA", runner.run_all,   { desc = "run all cells", silent = true })
-vks("n", "<LEADER>ql", runner.run_line,  { desc = "run line", silent = true })
-vks("v", "<LEADER>qs",  runner.run_range, { desc = "run visual range", silent = true })
+vks("n", "<LEADER>ql", runner.run_line, { desc = "run line", silent = true })
+vks("v", "<LEADER>qs", runner.run_range, { desc = "run visual range", silent = true })
 vks("n", "<LEADER>qA", function()
   runner.run_all(true)
 end, { desc = "run all cells of all languages", silent = true })
-

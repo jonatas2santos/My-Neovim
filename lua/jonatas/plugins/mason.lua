@@ -46,19 +46,23 @@ return {
         },
       })
 
-      -- Python PyLSP
+      -- Python PyLSP ( autocomplete, hover, imports, renames )
       vim.lsp.config("pylsp", {
         settings = {
           pylsp = {
             plugins = {
-              pycodestyle = { maxLineLength = 88 },
+              pycodestyle = { enabled = false },
+              mccabe = { enabled = false },
+              pyflakes = { enabled = false },
+              yapf = { enabled = false },
+              autopep8 = { enabled = false },
               pylint = { enabled = false },
             },
           },
         },
       })
 
-      -- Ruff (LSP standalone)
+      -- Ruff + Ruff Formatter
       vim.lsp.config("ruff", {
         settings = {},
       })
