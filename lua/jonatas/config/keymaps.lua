@@ -83,6 +83,9 @@ vks("n", "U", "<C-R>")
 -- select all
 vks("n", "<C-a>", "GVgg")
 
+-- execute py file
+vks("n", "<LEADER>pr", "<CMD>terminal python %<CR>", { desc = "execute current py file" })
+
 -- PLUGINS
 
 -- Formatter
