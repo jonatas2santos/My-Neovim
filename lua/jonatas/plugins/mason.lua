@@ -1,69 +1,52 @@
 return {
-  -- mason
+  -- Mason: external tool manager
   {
-    "mason-org/mason.nvim",
+    'mason-org/mason.nvim',
     opts = {
       ui = {
         icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗"
+          package_installed = '✓',
+          package_pending = '➜',
+          package_uninstalled = '✗'
         },
       },
-    }
+    },
   },
 
-  -- mason-lsp
+  -- Mason LSP bridge
   {
-    "mason-org/mason-lspconfig.nvim",
+    'mason-org/mason-lspconfig.nvim',
+    dependencies = {
+      'mason-org/mason.nvim',
+      'neovim/nvim-lspconfig',
+    },
     opts = {
       ensure_installed = {
-        "lua_ls",
-        "ruff",
-        "pylsp"
+        'lua_ls',
+        'ruff',
       },
-    },
-    dependencies = {
-      { "mason-org/mason.nvim", opts = {} },
-      "neovim/nvim-lspconfig",
     },
   },
 
-  -- lsp configs
+  -- LSP configurations
   {
-    "neovim/nvim-lspconfig",
+    'neovim/nvim-lspconfig',
     config = function()
-      -- Lua ls
-      vim.lsp.config("lua_ls", {
-        cmd = { "/usr/sbin/lua-language-server" },
+      -- Lua language server ( Neovim config )
+      vim.lsp.config('lua_ls', {
+        -- cmd = { "/usr/sbin/lua-language-server" },
         settings = {
           Lua = {
             diagnostics = {
-              globals = { "vim" },
+              globals = { 'vim' },
               workspace = { checkThirdParty = false },
             },
           },
         },
       })
 
-      -- Python PyLSP ( autocomplete, hover, imports, renames )
-      vim.lsp.config("pylsp", {
-        settings = {
-          pylsp = {
-            plugins = {
-              pycodestyle = { enabled = false },
-              mccabe = { enabled = false },
-              pyflakes = { enabled = false },
-              yapf = { enabled = false },
-              autopep8 = { enabled = false },
-              pylint = { enabled = false },
-            },
-          },
-        },
-      })
-
-      -- Ruff + Ruff Formatter
-      vim.lsp.config("ruff", {
+      -- Ruff LSP ( liting, diagnostics, code actions )
+      vim.lsp.config('ruff', {
         settings = {},
       })
     end,

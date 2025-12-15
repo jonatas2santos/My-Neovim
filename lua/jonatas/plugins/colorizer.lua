@@ -1,6 +1,15 @@
 return {
   'norcalli/nvim-colorizer.lua',
   opts = {
+    -- apply color highlighting only to specific filetypes
+    filetypes = {
+      'css',
+      'scss',
+      'html',
+      'lua',
+      'toml',
+      'yaml',
+    },
     DEFAULT_OPTIONS = {
       RGB      = true;         -- #RGB hex codes
       RRGGBB   = true;         -- #RRGGBB hex codes

@@ -1,11 +1,11 @@
 return {
   -- oxocarbon
   {
-    "nyoom-engineering/oxocarbon.nvim",
+    'nyoom-engineering/oxocarbon.nvim',
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme oxocarbon]])
+      vim.cmd.colorscheme('oxocarbon')
     end
   },
 

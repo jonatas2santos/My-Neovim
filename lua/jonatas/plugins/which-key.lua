@@ -3,9 +3,15 @@ return {
   event = "VeryLazy",
   opts = {
     preset = "helix",
-    icons = {
-      mappings = false,
-    }
+    delay = 500,
+    icons = { mappings = false },
+    spec = {
+      { '<leader>f', group = 'Find' },
+      { '<leader>s', group = 'Search' },
+      { '<leader>g', group = 'Git' },
+      { '<leader>x', group = 'Diagnostics / Trouble' },
+      { '<leader>b', group = 'Buffers' },
+    },
   },
   keys = {
     {

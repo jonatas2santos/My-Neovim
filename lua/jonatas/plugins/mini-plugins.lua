@@ -19,12 +19,11 @@ return {
         trim_left   = '<',
         trim_right  = '>',
       },
-      -- General options
       options = {
-        -- Whether to delete permanently or move into module-specific trash
-        permanent_delete = true,
-        -- Whether to use for editing directories
+        -- Do not override default directory editor ( Oil is primary )
         use_as_default_explorer = false,
+        -- Delete files permanently ( No trash abstraction )
+        permanent_delete = true,
       },
     },
   },
@@ -34,7 +33,6 @@ return {
     'nvim-mini/mini.pairs',
     version = false,
     opts = {},
-
   },
 
   -- mini-surround
@@ -43,12 +41,12 @@ return {
     version = false,
     opts = {
       mappings = {
-        add = 'sa',        -- Add surrounding in Normal and Visual modes
-        delete = 'sd',     -- Delete surrounding
-        find = 'sf',       -- Find surrounding (to the right)
-        find_left = 'sF',  -- Find surrounding (to the left)
-        highlight = 'sh',  -- Highlight surrounding
-        replace = 'sr',    -- Replace surrounding
+        add = 'ysa',        -- Add surrounding in Normal and Visual modes
+        delete = 'ysd',     -- Delete surrounding
+        find = 'ysf',       -- Find surrounding (to the right)
+        find_left = 'ysF',  -- Find surrounding (to the left)
+        highlight = 'ysh',  -- Highlight surrounding
+        replace = 'ysr',    -- Replace surrounding
 
         suffix_last = 'l', -- Suffix to search with "prev" method
         suffix_next = 'n', -- Suffix to search with "next" method
@@ -62,10 +60,11 @@ return {
     version = false,
     opts = {
       mappings = {
+        -- Toggle between single-line and multi-line constructs
         toggle = 'gS',
         split = '',
         join = '',
       },
-    }
-  }
+    },
+  },
 }

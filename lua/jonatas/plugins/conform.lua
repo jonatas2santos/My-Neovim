@@ -2,18 +2,19 @@ return {
   'stevearc/conform.nvim',
   opts = {
     formatters_by_ft = {
-      lua = { "stylua" },
-      -- Conform will run multiple formatters sequentially
+      -- Lua configuration files
+      lua = { 'stylua' },
+
+      -- Python ( Data science focused )
+      -- Ruff handles formatting, fixes and import organization
       python = {
-        "ruff_format",
-        "ruff_fix",
-        "ruff_organize_import",
+        'ruff_format',
+        'ruff_fix',
+        'ruff_organize_import',
       },
-      -- You can customize some of the format options for the filetype (:help conform.format)
-      rust = { "rustfmt", lsp_format = "fallback" },
-      -- Conform will run the first available formatter
-      javascript = { "prettierd", "prettier", stop_after_first = true },
     },
+
+    -- Disable automatic formatting on save
     format_on_save = false,
   },
 }

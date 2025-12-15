@@ -3,42 +3,51 @@ return {
   ---@module 'oil'
   ---@type oil.SetupOpts
   opts = {
+    -- Use Oil as the default file explorer
     default_file_explorer = true,
+    -- Columns displayed in the file list
     columns = {
-      "icon",
-      "permissions",
-      -- "size",
-      -- "mtime",
+      'icon',
+      'permissions',
     },
+    -- Move deleted files to trash instead of permanent delete
     delete_to_trash = true,
+    -- Do not ask confirmation for simple file edits
     skip_confirm_for_simple_edits = true,
+    -- Do not prompt to save when selecting another entry
     prompt_save_on_select_new_entry = false,
+
     view_options = {
-      -- Show files and directories that start with "."
+      -- Show dotfiles ( important for configs and dotfiles )
       show_hidden = true,
     },
+
     keymaps = {
-      ["g?"] = { "actions.show_help", mode = "n" },
-      ["l"] = "actions.select",
-      ["<C-s>"] = { "actions.select", opts = { vertical = true } },
-      ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
-      ["<C-t>"] = { "actions.select", opts = { tab = true } },
-      ["<C-p>"] = "actions.preview",
-      ["<C-c>"] = { "actions.close", mode = "n" },
-      ["<C-l>"] = "actions.refresh",
-      ["h"] = { "actions.parent", mode = "n" },
-      ["H"] = { "actions.open_cwd", mode = "n" },
-      ["`"] = { "actions.cd", mode = "n" },
-      ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
-      ["gs"] = { "actions.change_sort", mode = "n" },
-      ["gx"] = "actions.open_external",
-      ["g."] = { "actions.toggle_hidden", mode = "n" },
-      ["g\\"] = { "actions.toggle_trash", mode = "n" },
+      ['g?'] = { 'actions.show_help', mode = 'n' },
+      -- Navigation ( Vim-style )
+      ['l'] = 'actions.select',
+      ['h'] = { 'actions.parent', mode = 'n' },
+      ['H'] = { 'actions.open_cwd', mode = 'n' },
+      -- Open in splits / tabs
+      ['<C-s>'] = { 'actions.select', opts = { vertical = true } },
+      ['<C-h>'] = { 'actions.select', opts = { horizontal = true } },
+      ['<C-t>'] = { 'actions.select', opts = { tab = true } },
+      -- Preview and refresh
+      ['<C-p>'] = 'actions.preview',
+      ['<C-l>'] = 'actions.refresh',
+      -- Close Oil
+      ['<C-c>'] = { 'actions.close', mode = 'n' },
+      -- Change directory
+      ['`'] = { 'actions.cd', mode = 'n' },
+      ['~'] = { 'actions.cd', opts = { scope = 'tab' }, mode = 'n' },
+      -- Sorting and visibility
+      ['gs'] = { 'actions.change_sort', mode = 'n' },
+      ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
+      ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
+      -- Open file with external program
+      ['gx'] = 'actions.open_external',
     },
   },
-  -- Optional dependencies
-  dependencies = { { "nvim-mini/mini.icons", opts = {} } },
-  -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-  -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+  dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
   lazy = false,
 }

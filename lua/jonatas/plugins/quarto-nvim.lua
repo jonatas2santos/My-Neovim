@@ -1,37 +1,41 @@
 return {
-  "quarto-dev/quarto-nvim",
+  'quarto-dev/quarto-nvim',
   dependencies = {
-    "jmbuhr/otter.nvim",
-    "nvim-treesitter/nvim-treesitter",
+    'jmbuhr/otter.nvim',
+    'nvim-treesitter/nvim-treesitter',
   },
   opts = {
+    -- Quarto-specific LSP keybindings
     keymap = {
-      hover = "qh",
-      definition = "qd",
-      rename = "<Leader>qr",
-      references = "qr",
-      format = "qf",
+      hover = 'qh',
+      definition = 'qd',
+      rename = '<Leader>qr',
+      references = 'qR',
+      format = 'qf',
     },
     debug = false,
+    -- Close preview windows when leaving the buffer
     closePreviewOnExit = true,
     lspFeatures = {
       enabled = true,
-      chunks = "all",
-      languages = { "r", "python", "julia", "bash", "html", "rust" },
+      -- Enable LSP for all code chunks
+      chunks = 'all',
+      languages = { 'python', 'bash' },
       diagnostics = {
         enabled = true,
-        triggers = { "BufWritePost" },
+        -- Run diagnostics only after saving to reduce noise
+        triggers = { 'BufWritePost' },
       },
       completion = {
         enabled = true,
       },
     },
+    -- Delegate code execution to Molten
     codeRunner = {
       enabled = true,
-      default_method = "molten", -- "molten", "slime", "iron" or <function>
-      ft_runners = {}, -- filetype to runner, ie. `{ python = "molten" }`.
-      -- Takes precedence over `default_method`
-      never_run = { 'yaml' }, -- filetypes which are never sent to a code runner
+      default_method = 'molten',
+      -- Never run non-code filetypes
+      never_run = { 'yaml' },
     },
   },
 }

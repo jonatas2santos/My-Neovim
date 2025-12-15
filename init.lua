@@ -1,5 +1,25 @@
-require("jonatas.config.keymaps")        -- load keymaps.lua file
-require("jonatas.config.options")        -- load options.lua file
-require("jonatas.config.lazy")           -- load lazy.lua file
-require("jonatas.config.small-settings") -- load small-settings.lua file
-require("jonatas.config.autocmds") -- load autocmds.lua file
+-- ========================
+-- Neovim entry point
+-- ========================
+
+----------------
+-- Leader keys
+----------------
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+
+-- Core options ( must load first )
+require('jonatas.config.options')
+
+-- Plugins manager ( loads plugins + dependencies )
+require('jonatas.config.lazy')
+
+-- Keymaps 
+require('jonatas.config.keymaps')
+
+-- Autocommands
+require('jonatas.config.autocmds')
+
+-- Small UI / diagnostic / cosmetic settings
+require('jonatas.config.small-settings')
