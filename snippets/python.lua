@@ -12,6 +12,7 @@ return {
       'import pandas as pd',
       'import numpy as np',
       '',
+      -- improve dataframe display for wide tables
       "pd.set_option('display.max_columns', None)",
       "pd.set_option('display.width', 120)",
       '',
@@ -23,7 +24,6 @@ return {
   --        READ CSV        --
   ----------------------------
   s('csv', {
-    t(''),
     i(1, 'df'),
     t(" = pd.read_csv('"),
     i(2, 'arquivo.csv'),

@@ -27,7 +27,7 @@ return {
           init_selection = 'gn',
           node_incremental = 'gn',
           scope_incremental = 'gN',
-        node_decremental = false,
+        node_decremental = 'g<BS>',
         },
       },
     },

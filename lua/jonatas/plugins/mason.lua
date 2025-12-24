@@ -1,5 +1,5 @@
 return {
-  -- Mason: external tool manager
+  -- Mason: external tool manager (LSPs, formatters, linters)
   {
     'mason-org/mason.nvim',
     opts = {
@@ -13,7 +13,7 @@ return {
     },
   },
 
-  -- Mason LSP bridge
+  -- Mason ↔ LSP bridge
   {
     'mason-org/mason-lspconfig.nvim',
     dependencies = {
@@ -21,6 +21,7 @@ return {
       'neovim/nvim-lspconfig',
     },
     opts = {
+      -- Automatically install required language servers
       ensure_installed = {
         'lua_ls',
         'ruff',
@@ -28,11 +29,11 @@ return {
     },
   },
 
-  -- LSP configurations
+  -- LSP server configuration
   {
     'neovim/nvim-lspconfig',
     config = function()
-      -- Lua language server ( Neovim config )
+      -- Lua language server (Neovim config files)
       vim.lsp.config('lua_ls', {
         -- cmd = { "/usr/sbin/lua-language-server" },
         settings = {
@@ -41,13 +42,19 @@ return {
               globals = { 'vim' },
               workspace = { checkThirdParty = false },
             },
+            -- Disable LSP formatting (handled by Conform/Stylua)
+            format = {
+              enable = false,
+            },
           },
         },
       })
 
-      -- Ruff LSP ( liting, diagnostics, code actions )
+      -- Ruff LSP (linting, diagnostics, code actions for Python)
       vim.lsp.config('ruff', {
-        settings = {},
+        settings = {
+          -- Keep minimal, Ruff is already configured via pyproject.toml
+        },
       })
     end,
   },

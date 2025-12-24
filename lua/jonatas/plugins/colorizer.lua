@@ -1,7 +1,8 @@
 return {
   'norcalli/nvim-colorizer.lua',
   opts = {
-    -- apply color highlighting only to specific filetypes
+    -- Apply color highlighting only to specific filetypes
+    -- This avoids visual noise in data science and writing workflows
     filetypes = {
       'css',
       'scss',
@@ -19,8 +20,9 @@ return {
       hsl_fn   = false;        -- CSS hsl() and hsla() functions
       css      = false;        -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
       css_fn   = false;        -- Enable all CSS *functions*: rgb_fn, hsl_fn
-      -- Available modes: foreground, background
-      mode     = 'background'; -- Set the display mode.
+      -- Display mode for color highlighting
+      -- 'background' improves readability over 'foreground'
+      mode     = 'background';
     },
   },
 }

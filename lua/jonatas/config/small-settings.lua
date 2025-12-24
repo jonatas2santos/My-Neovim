@@ -1,4 +1,8 @@
--- Diagnostic visual
+-- ======================
+-- Small UI / diagnostics
+-- ======================
+
+-- Diagnostic visuals
 vim.diagnostic.config({
   virtual_text = true,
   signs = {
@@ -13,9 +17,20 @@ vim.diagnostic.config({
 
 -- Auto attach Colorizer for supported filetypes
 local colorizer_group = vim.api.nvim_create_augroup('colorizer_attach', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+vim.api.nvim_create_autocmd({ 'FileType' }, {
   group = colorizer_group,
+  pattern = {
+    'css',
+    'scss',
+    'html',
+    'lua',
+    'python',
+    'markdown',
+    'quarto',
+  },
   callback = function()
-    vim.cmd('ColorizerAttachToBuffer')
+    if vim.fn.exists(':ColorizerAttachToBuffer') == 2 then
+      vim.cmd('ColorizerAttachToBuffer')
+    end
   end,
 })

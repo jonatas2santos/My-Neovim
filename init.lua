@@ -8,14 +8,13 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-
 -- Core options ( must load first )
 require('jonatas.config.options')
 
 -- Plugins manager ( loads plugins + dependencies )
 require('jonatas.config.lazy')
 
--- Keymaps 
+-- Global keymaps 
 require('jonatas.config.keymaps')
 
 -- Autocommands

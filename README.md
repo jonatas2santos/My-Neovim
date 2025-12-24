@@ -101,7 +101,8 @@ Semantic prefixes are used:
 
 * `<leader>a`  tabs
 * `<leader>s`  splits
-* `<leader>q`  sessions / quarto
+* `<leader>p`  sessions
+* `<leader>q`  quarto
 * `<leader>m`  molten
 * `<leader>t`  exit actions
 
@@ -188,10 +189,10 @@ Works in **Normal and Insert Mode**.
 
 | Key          | Action              |
 | ------------ | ------------------- |
-| `<leader>qs` | Load session (cwd)  |
-| `<leader>qS` | Select session      |
-| `<leader>ql` | Load last session   |
-| `<leader>qd` | Stop saving session |
+| `<leader>pl` | Load session (cwd)  |
+| `<leader>ps` | Select session      |
+| `<leader>pL` | Load last session   |
+| `<leader>pd` | Stop saving session |
 
 ---
 
@@ -200,6 +201,7 @@ Works in **Normal and Insert Mode**.
 | Key          | Action                     |
 | ------------ | -------------------------- |
 | `<leader>pr` | Run current Python file    |
+| `<leader>mr` | Run current Markdown file  |
 | `<leader>fr` | Format buffer (LSP / Ruff) |
 
 ---

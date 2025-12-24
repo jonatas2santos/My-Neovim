@@ -1,6 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = { 'nvim-mini/mini.icons', opts = {} },
   opts = function ()
     -- Custom highlight for the clock component
     vim.api.nvim_set_hl(0, 'Clock_Color', {

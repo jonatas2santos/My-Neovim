@@ -14,7 +14,7 @@ return {
     require('luasnip.loaders.from_lua').lazy_load( { paths = '~/.config/nvim/snippets' })
 
     -- Snippet keymaps ( Alt-based, hjkl-friendly )
-    vim.keymap.set({'i'}, '<A-u>', function() ls.expand() end, { silent = true, desc = 'expand Snippet' })
+    vim.keymap.set({'i'}, '<A-u>', function() if ls.expandable() then ls.expand() end end, { silent = true, desc = 'expand Snippet' })
     vim.keymap.set({'i', 's'}, '<A-j>', function() ls.jump( 1) end, { silent = true, desc = 'jump to next Snippet field' })
     vim.keymap.set({'i', 's'}, '<A-k>', function() ls.jump(-1) end, { silent = true, desc = 'jump to prev Snippet field' })
 
