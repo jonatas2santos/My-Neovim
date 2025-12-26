@@ -8,10 +8,10 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Core options ( must load first )
+-- Core options ( must be loaded first )
 require('jonatas.config.options')
 
--- Plugins manager ( loads plugins + dependencies )
+-- Plugins manager ( loads plugins and dependencies )
 require('jonatas.config.lazy')
 
 -- Global keymaps 

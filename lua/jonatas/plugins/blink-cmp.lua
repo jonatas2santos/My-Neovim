@@ -2,7 +2,6 @@ return {
   'saghen/blink.cmp',
   -- Snippet collection used by the completion engine
   dependencies = { 'rafamadriz/friendly-snippets' },
-  -- Lock to major version 1.x to avoid breaking changes
   version = '1.*',
 
   ---@module 'blink.cmp'
@@ -10,7 +9,6 @@ return {
   opts = {
     keymap = {
       -- Use the 'super-tab' preset:
-      -- Tab accepts completion, Shift-Tab navigates backwards
       preset = 'super-tab',
       -- Navigate completion items using Alt + j/k
       ['<A-k>'] = { 'select_prev', 'fallback' },

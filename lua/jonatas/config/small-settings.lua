@@ -1,7 +1,6 @@
--- ======================
--- Small UI / diagnostics
--- ======================
-
+-- =================================
+-- SMALL UI / DIAGNOSTIC SETTINGS
+-- =================================
 -- Diagnostic visuals
 vim.diagnostic.config({
   virtual_text = true,
@@ -16,8 +15,8 @@ vim.diagnostic.config({
 })
 
 -- Auto attach Colorizer for supported filetypes
-local colorizer_group = vim.api.nvim_create_augroup('colorizer_attach', { clear = true })
-vim.api.nvim_create_autocmd({ 'FileType' }, {
+local colorizer_group = vim.api.nvim_create_augroup('ColorizerAttach', { clear = true })
+vim.api.nvim_create_autocmd( 'FileType', {
   group = colorizer_group,
   pattern = {
     'css',

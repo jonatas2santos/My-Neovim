@@ -1,14 +1,11 @@
--- Activate Quarto only for Quarto markdown files (.qmd)
--- Prevents enabling Quarto features for regular Markdown files
+-- Enable Quarto only for Quarto Markdown files (.qmd)
+-- This prevents Quarto features from being activated in regular Markdown files
 local ok, quarto = pcall(require, 'quarto')
 if not ok then
   return
 end
 
--- Get current file name
-local fname = vim.fn.expand('%:t')
-
--- Enable Quarto only for .qmd files
-if fname:match('%.qmd$') then
+-- Check filetype instead of filename for better reliability
+if vim.bo.filetype == 'markdown' and vim.fn.expand('%:e') == 'qmd' then
   quarto.activate()
 end

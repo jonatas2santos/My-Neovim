@@ -9,8 +9,7 @@ return {
       -- Clear search highlights after jumping
       -- Keeps the screen clean for reading and studying
       nohlsearch = true,
-      -- Disable automatic jumps
-      -- Improves predictability and control
+      -- Disable automatic jumps for better control
       autojump = false,
     },
 
@@ -25,7 +24,6 @@ return {
 
     modes = {
       -- Enable Flash integration with search (/)
-      -- Provides a consistent navigation experience
       search = {
         enabled = true,
       },
@@ -33,16 +31,15 @@ return {
 
     char = {
       -- Show jump labels for single-character motions
+      -- Improves precision over native f/F/t/T
       jump_labels = true,
     },
- },
+  },
 
   keys = {
     -- Main Flash jump
-    -- Works in normal, visual and operator-pending modes
     { 's', mode = { 'n', 'x', 'o' }, function() require('flash').jump() end, desc = 'Flash' },
     -- Treesitter-based jump
-    -- Useful for structured navigation in code
     { 'S', mode = { 'n', 'x', 'o' }, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },
     -- Remote jump (operator-pending)
     { 'r', mode = 'o', function() require('flash').remote() end, desc = 'Remote Flash' },

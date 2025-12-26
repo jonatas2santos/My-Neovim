@@ -5,6 +5,16 @@ local i = ls.insert_node
 
 return {
   -----------------------------
+  --      NOTEBOOK CELL      --
+  -----------------------------
+  s('cc', {
+    t('# %% '),
+    t({ '','' }),
+    i(1, 'cell'),
+    t({ '','' }),
+  }),
+
+  -----------------------------
   -- DATA SCIENCE BASE SETUP --
   -----------------------------
   s('ds', {
@@ -26,16 +36,13 @@ return {
   s('csv', {
     i(1, 'df'),
     t(" = pd.read_csv('"),
-    i(2, 'arquivo.csv'),
-    t({
-      "')",
-      '',
-    }),
+    i(2, 'file.csv'),
+    t("')"),
     i(0),
   }),
 
   -----------------------------
-  -- QUICK DATAFRAME PREVIEW --
+  --   DATAFRAME INSPECTION  --
   -----------------------------
   s('head', {
     i(1, 'df'),
@@ -50,5 +57,16 @@ return {
   s('shape', {
     i(1, 'df'),
     t('.shape'),
+  }),
+
+  s('describe', {
+    i(1, 'df'),
+    t('.describe()'),
+  }),
+
+  s('phead', {
+    t('print('),
+    i(1, 'df'),
+    t('.head())'),
   }),
 }

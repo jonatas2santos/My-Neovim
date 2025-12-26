@@ -1,6 +1,5 @@
 -- ============================================
 -- KEYMAPS - Core of the Neovim setup
--- Organized by domain and semantic prefixes
 -- ============================================
 
 -- Local helpers
@@ -22,8 +21,8 @@ vks('i', 'jk', '<ESC>')
 -- NORMAL / VISUAL MODE - Line & text movement
 ------------------------------------------------
 -- Move selected lines while keeping selection and indentation
-vks("v", "J", ":m '>+1<CR>gv=gv", { desc = "move selection down" })
-vks("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
+vks('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'move selection down' })
+vks('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'move selection up' })
 
 -- Join lines without moving cursor
 vks('n', 'J', 'mzJ`z')
@@ -49,11 +48,11 @@ vks('v', 'L', '>gv', opts)
 vks({ 'n', 'v' }, '<LEADER>d', [["_d]], { desc = 'delete without yanking' })
 
 -- Delete single character without yanking
-vks("n", "x", '"_x', opts)
+vks('n', 'x', '"_x', opts)
 
 -- Replace word under cursor globally
 vks('n', '<LEADER>rw', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<LEFT><LEFT><LEFT>]],
-  { desc = 'replace word under cursor (global)' })
+{ desc = 'replace word under cursor (global)' })
 
 -- Clear search highlights
 vks('n', '<LEADER>h', '<CMD>nohl<CR>', { desc = 'clear search hl', silent = true })
@@ -66,6 +65,15 @@ vks('n', '<LEADER>xc', '<CMD>!chmod u+x %<CR>', { desc = 'make file executable',
 
 -- Select all
 vks('n', '<C-a>', 'GVgg')
+
+-- Redo
+vks('n', 'U', '<C-R>')
+
+-- cd to current file directory
+vks('n', '<LEADER>cd', function()
+  vim.cmd('cd %:p:h')
+  print('CWD:', vim.fn.getcwd())
+end, { desc = 'cd to current file directory' })
 
 ---------------------------------
 -- TAB MANAGEMENT ( <LEADER>a* )
@@ -98,16 +106,10 @@ end
 
 vks('n', '<LEADER>ad', function()
   tabmove_wrap('next')
-end, { desc = 'Move tab right (wrap)' })
+end, { desc = 'move tab right (wrap)' })
 vks('n', '<LEADER>as', function()
   tabmove_wrap('prev')
-end, { desc = 'Move tab left (wrap)' })
-
-
-vks('n', '<LEADER>cd', function()
-  vim.cmd('cd %:p:h')
-  print('CWD:', vim.fn.getcwd())
-end, { desc = 'cd para diretório do buffer atual' })
+end, { desc = 'move tab left (wrap)' })
 
 -----------------------------------------------
 -- WINDOW / SPLIT MANAGEMENT ( <LEADER>s* )
@@ -140,23 +142,20 @@ vks('n', '<LEADER>tg', '<CMD>wq<CR>', { desc = 'save & quit' })
 vks('n', '<LEADER>ta', '<CMD>wqa<CR>', { desc = 'save & quit all' })
 vks('n', '<LEADER>tf', '<CMD>qa!<CR>', { desc = 'force quit Neovim' })
 
--- Redo
-vks('n', 'U', '<C-R>')
-
 ------------------
 -- DEVELOPMENT
 ------------------
 -- Run current Python file
-vks('n', '<LEADER>pr', function()
+vks('n', '<LEADER>rp', function()
   local file = vim.fn.shellescape(vim.fn.expand('%:p'))
   vim.cmd('rightbelow vsplit | terminal python ' .. file)
-end, { desc = 'run current python file '})
+end, { desc = 'run current Python file '})
 
 -- Run current Markdown file
-vks('n', '<LEADER>mr', function()
+vks('n', '<LEADER>rm', function()
   local file = vim.fn.shellescape(vim.fn.expand('%:p'))
   vim.cmd('rightbelow vsplit | terminal glow -p ' .. file)
-end, { desc = 'run current markdown file '})
+end, { desc = 'run current Markdown file '})
 
 -- Format buffer ( LSP / RUFF )
 vks('n', '<LEADER>fr', function()
@@ -193,11 +192,11 @@ end, { desc = 'Noice: dismiss messages' })
 ------------------
 vks('n', ']t', function()
   require('todo-comments').jump_next()
-end, { desc = 'Next TODO comment' })
+end, { desc = 'next TODO comment' })
 
 vks('n', '[t', function()
   require('todo-comments').jump_prev()
-end, { desc = 'Prev TODO comment' })
+end, { desc = 'prev TODO comment' })
 
 --------------------------------------------
 -- PERSISTENCE ( session ) ( <LEADER>p* )
@@ -208,7 +207,7 @@ vks('n', '<leader>pL', function() require('persistence').load({ last = true }) e
 vks('n', '<leader>pd', function() require('persistence').stop() end, { desc = 'stop session saving' })
 
 --------------------------------------------
--- BUFFERLINE JUMP TABS 1-9
+-- BUFFERLINE TABS JUMPS 1-9
 --------------------------------------------
 for i = 1, 9 do
   vks('n', '<LEADER>' .. i, function ()
@@ -221,14 +220,14 @@ end
 ------------
 local ok, runner = pcall(require, 'quarto.runner')
 if ok then
-vks('n', '<leader>qp', '<CMD>QuartoPreview<CR>', { desc = 'quarto preview', silent = true, noremap = true })
-vks('n', '<LEADER>qc', runner.run_cell, { desc = 'run cell', silent = true })
-vks('n', '<LEADER>qa', runner.run_above, { desc = 'run cell and above', silent = true })
-vks('n', '<LEADER>ql', runner.run_line, { desc = 'run line', silent = true })
-vks('v', '<LEADER>qs', runner.run_range, { desc = 'run visual range', silent = true })
-vks('n', '<LEADER>qA', function()
-  runner.run_all(true)
-end, { desc = 'run all cells (all languages)', silent = true })
+  vks('n', '<leader>qp', '<CMD>QuartoPreview<CR>', { desc = 'Quarto: preview', silent = true, noremap = true })
+  vks('n', '<LEADER>qc', runner.run_cell, { desc = 'Quarto: run cell', silent = true })
+  vks('n', '<LEADER>qa', runner.run_above, { desc = 'Quarto: run cell and above', silent = true })
+  vks('n', '<LEADER>ql', runner.run_line, { desc = 'Quarto: run line', silent = true })
+  vks('v', '<LEADER>qs', runner.run_range, { desc = 'Quarto: run visual range', silent = true })
+  vks('n', '<LEADER>qA', function()
+    runner.run_all(true)
+  end, { desc = 'Quarto: run all cells (all languages)', silent = true })
 end
 
 ------------
@@ -242,16 +241,15 @@ vks('n', '<LEADER>mo', '<CMD>noautocmd MoltenEnterOutput<CR>', { desc = 'Molten:
 vks('n', '<LEADER>mh', '<CMD>MoltenHideOutput<CR>', { desc = 'Molten: hide output', silent = true })
 vks('n', '<LEADER>md', '<CMD>MoltenDelete<CR>', { desc = 'Molten: delete cell', silent = true })
 
--- ============================================
+-- ============================
 -- CELL NAVIGATION ( # %% )
--- ============================================
-
+-- ============================
 local function goto_next_cell()
   local cur = vim.api.nvim_win_get_cursor(0)[1]
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 
   for i = cur + 1, #lines do
-    if lines[i]:match("^# %%%%") then
+    if lines[i]:match('^# %%%%') then
       vim.api.nvim_win_set_cursor(0, { i + 1, 0 })
       return
     end
@@ -265,7 +263,7 @@ local function goto_prev_cell()
   -- Step 1: find the start of the current cell
   local current_cell_start = nil
   for i = cur, 1, -1 do
-    if lines[i]:match("^# %%%%") then
+    if lines[i]:match('^# %%%%') then
       current_cell_start = i
       break
     end
@@ -277,11 +275,12 @@ local function goto_prev_cell()
 
   -- Step 2: find the previous cell before it
   for i = current_cell_start - 1, 1, -1 do
-    if lines[i]:match("^# %%%%") then
+    if lines[i]:match('^# %%%%') then
       vim.api.nvim_win_set_cursor(0, { i + 1, 0 })
       return
     end
   end
 end
+
 vks('n', '<LEADER>mn', goto_next_cell, { desc = 'go to next cell', silent = true })
 vks('n', '<LEADER>mp', goto_prev_cell, { desc = 'go to previous cell', silent = true })

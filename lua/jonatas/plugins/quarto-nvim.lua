@@ -23,7 +23,7 @@ return {
       languages = { 'python', 'bash' },
       diagnostics = {
         enabled = true,
-        -- Run diagnostics only after saving to reduce noise
+        -- Run diagnostics only after saving
         triggers = { 'BufWritePost' },
       },
       completion = {
@@ -34,7 +34,6 @@ return {
     codeRunner = {
       enabled = true,
       default_method = 'molten',
-      -- Never run non-code filetypes
       never_run = { 'yaml' },
     },
   },

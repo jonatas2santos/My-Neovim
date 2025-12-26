@@ -1,5 +1,5 @@
 return {
-  -- Mason: external tool manager (LSPs, formatters, linters)
+  -- Mason: external tool manager ( LSPs, formatters, linters )
   {
     'mason-org/mason.nvim',
     opts = {
@@ -7,7 +7,7 @@ return {
         icons = {
           package_installed = '✓',
           package_pending = '➜',
-          package_uninstalled = '✗'
+          package_uninstalled = '✗',
         },
       },
     },
@@ -33,8 +33,8 @@ return {
   {
     'neovim/nvim-lspconfig',
     config = function()
-      -- Lua language server (Neovim config files)
-      vim.lsp.config('lua_ls', {
+      -- Lua language server ( Neovim config files )
+      vim.lsp.config( 'lua_ls', {
         -- cmd = { "/usr/sbin/lua-language-server" },
         settings = {
           Lua = {
@@ -50,7 +50,7 @@ return {
         },
       })
 
-      -- Ruff LSP (linting, diagnostics, code actions for Python)
+      -- Ruff LSP ( linting, diagnostics, code actions for Python )
       vim.lsp.config('ruff', {
         settings = {
           -- Keep minimal, Ruff is already configured via pyproject.toml
