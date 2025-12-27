@@ -378,14 +378,12 @@ Other distros must adapt package manager commands.
 Download the install.sh file using wget or curl:
 
 ```bash
-wget https://raw.githubusercontent.com/jonatas2santos/My-Neovim/refs/heads/master/install.sh
+wget https://raw.githubusercontent.com/jonatas2santos/My-Neovim/refs/heads/master/install.sh || chmod u+x install.sh || ./install.sh
 ```
 or
 ```bash
-curl -LO https://raw.githubusercontent.com/jonatas2santos/My-Neovim/refs/heads/master/install.sh
+curl -LO https://raw.githubusercontent.com/jonatas2santos/My-Neovim/refs/heads/master/install.sh || chmod u+x install.sh || ./install.sh
 ```
-
-then give executable permission to file ( chmod u+x install.sh ) and run it ( ./install.sh ).
 
 ## ✅ Final Checklist
 
