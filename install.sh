@@ -113,8 +113,10 @@ echo
 section "Backing up existing Neovim configuration..."
 if [[ -d ~/.config/nvim ]] then
   mv ~/.config/nvim ~/.config/OLDnvim
+  sleep 3
   echo "Backup completed!!"
 else
+  sleep 3
   echo "No previous Neovim configuration found."
 fi
 sleep 5
