@@ -1,17 +1,17 @@
--- ===========
--- AUTOCMDS
--- ===========
+-- ==============
+-- AUTOCOMMANDS
+-- ==============
 
 -- Copy current file path to clipboard
 vim.keymap.set('n', '<LEADER>fp', function()
-  local filePath = vim.fn.expand('%:~')
-  vim.fn.setreg('+', filePath)
-  print('file path copied to clipboard: ' .. filePath)
+  local file_path = vim.fn.expand( '%:~' )
+  vim.fn.setreg( '+', file_path )
+  print( 'file path copied to clipboard: ' .. file_path )
 end, { desc = 'copy file path to clipboard' })
 
--- highlight text on yank
-local yank_group = vim.api.nvim_create_augroup('highlight_yank', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+-- Highlight text on yank
+local yank_group = vim.api.nvim_create_augroup( 'highlight_yank', { clear = true })
+vim.api.nvim_create_autocmd( 'TextYankPost', {
   group = yank_group,
   desc = 'highlight when yanking text',
   callback = function()
@@ -20,23 +20,31 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Open help files in a vertical split on the right
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd( 'FileType', {
   pattern = 'help',
   callback = function ()
     vim.cmd.wincmd('L')
   end,
 })
 
+-- Close the help buffers with 'q'
+vim.api.nvim_create_autocmd( 'FileType', {
+  pattern = 'help',
+  callback = function()
+    vim.keymap.set('n', 'q', '<cmd>quit<CR>', { buffer = true, silent = true })
+  end,
+})
+
 -- Auto-resize splits when the window size changes
-vim.api.nvim_create_autocmd('VimResized', {
+vim.api.nvim_create_autocmd( 'VimResized', {
   callback = function ()
-   vim.cmd.wincmd('=')
+    vim.cmd.wincmd('=')
   end,
 })
 
 -- Disable automatic comment continuation
-local no_comment_group = vim.api.nvim_create_augroup('no_auto_comment', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
+local no_comment_group = vim.api.nvim_create_augroup( 'no_auto_comment', { clear = true })
+vim.api.nvim_create_autocmd( 'FileType', {
   group = no_comment_group,
   callback = function()
     vim.opt_local.formatoptions:remove({ 'c', 'r', 'o' })
@@ -44,7 +52,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Show cursorline only in the active window
-local cursorline_group = vim.api.nvim_create_augroup('active_cursorline', { clear = true })
+local cursorline_group = vim.api.nvim_create_augroup( 'active_cursorline', { clear = true })
 vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
   group = cursorline_group,
   callback = function()
@@ -60,7 +68,7 @@ vim.api.nvim_create_autocmd({ 'WinLeave', 'BufLeave' }, {
 })
 
 -- Sync working directory with Oil
-vim.api.nvim_create_autocmd('BufEnter', {
+vim.api.nvim_create_autocmd( 'BufEnter', {
   pattern = 'oil://*',
   callback = function()
     local dir = require('oil').get_current_dir()
@@ -70,16 +78,8 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
--- Close the help window with q
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'help',
-  callback = function()
-    vim.keymap.set('n', 'q', '<cmd>quit<CR>', { buffer = true, silent = true })
-  end,
-})
-
 -- Auto-create missing directories on save
-vim.api.nvim_create_autocmd('BufWritePre', {
+vim.api.nvim_create_autocmd( 'BufWritePre', {
   callback = function()
     local dir = vim.fn.expand('<afile>:p:h')
     if vim.fn.isdirectory(dir) == 0 then
@@ -88,11 +88,17 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end,
 })
 
--- Unlink when exiting insert
-vim.api.nvim_create_autocmd('InsertLeave', {
+-- Unlink LuaSnip snippet when leaving insert mode
+vim.api.nvim_create_autocmd( 'InsertLeave', {
   callback = function()
-    if require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()] then
-      require('luasnip').unlink_current()
+    local ok, ls = pcall(require, 'luasnip')
+    if not ok then
+      return
+    end
+
+    local buf = vim.api.nvim_get_current_buf()
+    if ls.session.current_nodes[buf] then
+      ls.unlink_current()
     end
   end,
 })
@@ -101,7 +107,7 @@ vim.api.nvim_create_autocmd('InsertLeave', {
 -- CELL HIGHLIGHT ( Jupyter-style # %% cells )
 -- ============================================
 
-local cell_ns = vim.api.nvim_create_namespace('cell_highlight')
+local cell_ns = vim.api.nvim_create_namespace( 'cell_highlight' )
 
 -- Highlight groups
 vim.api.nvim_set_hl(0, 'CellHeaderHighlight', {
@@ -125,19 +131,21 @@ vim.api.nvim_set_hl(0, 'CellIcon', {
 local function highlight_current_cell()
   local buf = vim.api.nvim_get_current_buf()
   local cursor = vim.api.nvim_win_get_cursor(0)[1]
-  local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+  local lines = vim.api.nvim_buf_get_lines( buf, 0, -1, false )
 
-  vim.api.nvim_buf_clear_namespace(buf, cell_ns, 0, -1)
+  vim.api.nvim_buf_clear_namespace( buf, cell_ns, 0, -1 )
 
-  -- Collect cell headers
+  -- Collect all cell headers
   local cells = {}
   for i, line in ipairs(lines) do
-    if line:match('^# %%%%') then
+    if line:match( '^# %%%%' ) then
       table.insert(cells, i)
     end
   end
 
-  if #cells == 0 then return end
+  if #cells == 0 then
+    return
+  end
 
   local start_line, end_line
 
@@ -145,38 +153,33 @@ local function highlight_current_cell()
     local cur = cells[i]
     local nxt = cells[i + 1]
 
-    if cursor >= cur and (not nxt or cursor < nxt) then
+    if cursor >= cur and ( not nxt or cursor < nxt ) then
       start_line = cur
-      end_line = (nxt and nxt - 1) or #lines
+      end_line = ( nxt and nxt - 1 ) or #lines
       break
     end
   end
 
-  if not start_line then return end
+  if not start_line then
+    return
+  end
 
-  -- Header highlight
-  vim.api.nvim_buf_add_highlight(buf, cell_ns, 'CellHeaderHighlight', start_line - 1, 0, -1)
+  -- Highlight header
+  vim.api.nvim_buf_add_highlight( buf, cell_ns, 'CellHeaderHighlight', start_line - 1, 0, -1 )
 
-  -- Icon on header
-  vim.api.nvim_buf_set_extmark(buf, cell_ns, start_line - 1, 0, {
+  -- Header icon
+  vim.api.nvim_buf_set_extmark( buf, cell_ns, start_line - 1, 0, {
     virt_text = { { '󰐍 ', 'CellIcon' } },
     virt_text_pos = 'overlay',
   })
 
-  -- Highlight body
+  -- Highlight cell body
   for l = start_line + 1, end_line do
-    vim.api.nvim_buf_add_highlight(
-      buf,
-      cell_ns,
-      'CellBodyHighlight',
-      l - 1,
-      0,
-      -1
-    )
+    vim.api.nvim_buf_add_highlight( buf, cell_ns, 'CellBodyHighlight', l - 1, 0, -1 )
   end
 
-  -- Separator on LAST line of the cell
-  vim.api.nvim_buf_set_extmark(buf, cell_ns, end_line - 1, 0, {
+  -- Bottom separator
+  vim.api.nvim_buf_set_extmark( buf, cell_ns, end_line - 1, 0, {
     virt_text = { { '─' .. string.rep('─', 50), 'CellSeparator' } },
     virt_text_pos = 'eol',
   })

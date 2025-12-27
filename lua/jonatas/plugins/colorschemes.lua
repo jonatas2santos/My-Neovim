@@ -11,9 +11,14 @@ return {
     -- High priority ensures it loads before UI plugins
     priority = 1000,
     config = function()
+      -- Ensure true color support
+      vim.opt.termguicolors = true
       -- Safely apply the colorscheme
       -- Prevents startup errors if the theme fails to load
-      pcall(vim.cmd.colorscheme, 'oxocarbon')
+      local ok, _ = pcall(vim.cmd.colorscheme, 'oxocarbon')
+      if not ok then
+        vim.notify('Failed to load oxocarbon colorscheme', vim.log.levels.WARN)
+      end
     end,
   },
 

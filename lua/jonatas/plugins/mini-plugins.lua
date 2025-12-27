@@ -1,6 +1,7 @@
 return {
   -- Collection of lightweight Mini.nvim modules
-  -- mini-files File explorer (secondary, Oil is primary)
+
+  -- mini-files: File explorer (secondary, Oil is primary)
   {
     'nvim-mini/mini.files',
     version = false,
@@ -21,22 +22,22 @@ return {
         trim_right  = '>',
       },
       options = {
-        -- Do not override default directory editor ( Oil is primary )
+        -- Do not replace default file explorer ( Oil is primary )
         use_as_default_explorer = false,
-        -- Delete files permanently ( No trash )
+        -- Delete files permanently ( NO TRASH )
         permanent_delete = true,
       },
     },
   },
 
-  -- mini-pairs Auto-pairs for brackets and quotes
+  -- mini-pairs: Automatic pairs for brackets and quotes
   {
     'nvim-mini/mini.pairs',
     version = false,
     opts = {},
   },
 
-  -- mini-surround Surround text objects
+  -- mini-surround: Surround text objects
   {
     'nvim-mini/mini.surround',
     version = false,
@@ -55,7 +56,7 @@ return {
     },
   },
 
-  -- mini-splitjoin Split / join code structures
+  -- mini-splitjoin: Split / join code structures
   {
     'nvim-mini/mini.splitjoin',
     version = false,
@@ -69,7 +70,7 @@ return {
     },
   },
 
-  -- mini-icons Icon provider (used by supported plugins)
+  -- mini-icons: Shared icon provider (used by supported plugins)
   {
     'nvim-mini/mini.icons',
     version = false,

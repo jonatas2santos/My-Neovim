@@ -7,9 +7,8 @@ return {
       -- Keep formatting consistent across the Neovim config
       lua = { 'stylua' },
 
-      -- Python (data science focused workflow)
-      -- Ruff is used as a single tool for:
-      -- formatting, autofixes and import organization
+      -- Python ( data science focused workflow )
+      -- Ruff handles formatting, fixes and imports
       python = {
         'ruff_format',
         'ruff_fix',
@@ -23,7 +22,6 @@ return {
     -- Disable automatic formatting on save
     -- Formatting is triggered manually to avoid
     -- disrupting exploratory or notebook-style workflows
-    -- LEADER + F = format
     format_on_save = false,
   },
 }

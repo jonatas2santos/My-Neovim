@@ -1,14 +1,7 @@
-# Neovim Configuration - Data Science & Quarto Focus
+# 🧠 Neovim — Minimal Data Science Setup
 
-## 🪐 Overview
-
-This Neovim configuration is designed as **focused, minimal, and productive environment** for:
-
-* **Data Science ( Python, Pandas, Jupyter-like workflows )**
-* **Literate programming with Quarto / Markdown**
-* **Long coding sessions with low cognitive load**
-
-It avoids bloated abstractions, favors explicit keymaps, and keeps responsibilities clearly separated.
+A personal **Neovim configuration focused on clarity, performance and data science workflows**.
+This setup is **not meant to be universal or “the best”** — it reflects how *I* like to work and evolves as my workflow evolves.
 
 ---
 
@@ -23,6 +16,56 @@ It avoids bloated abstractions, favors explicit keymaps, and keeps responsibilit
 * **Real workflows**: designed for daily use, not for screenshots
 
 This is not a Neovim distro - it is a **PERSONAL WORKBENCH**.
+
+---
+
+## 🧩 Core Features
+
+### 🧠 Editing & Navigation
+- Treesitter-based syntax highlighting
+- Smart indentation
+- Fast structural navigation ( Flash )
+- Modern motions without breaking Vim habits
+![Neovim](./images/nvim.gif)
+
+### 🧪 Data Science Workflow
+- Native Jupyter-style workflow via **Molten**
+- Works with `.py`, `.ipynb`, and `.qmd`
+- Inline outputs and plots
+- Ruff for linting, formatting and imports
+- Quarto integration for reproducible research
+- Cell highlight
+![Notebook Code](./images/notebook-code.png)
+![Notebook Output](./images/notebook-output.png)
+
+### 🚨 Diagnostics & Troubleshooting
+- Centralized diagnostics view
+- Project-wide and buffer-specific errors
+- Clear severity indicators
+- Quick navigation between issues
+- Clean and focused error display
+![Trouble Diagnostics](./images/trouble.png)
+
+### 🔍 Search & Navigation
+- `snacks.nvim` as the main picker
+- Fast fuzzy search
+- Project-aware navigation
+![Snacks Picker](./images/snacks-picker.png)
+
+### 📁 File Management
+- Fast and intuitive file navigation
+- Minimal, distraction-free file explorer
+- Seamless integration with buffers and tabs
+- External file opening support
+- Safe file operations (rename, delete, move)
+![Oil File Explorer](./images/oil.png)
+
+### 🎨 UI / UX
+- Clean dashboard
+- Minimal notifications
+- Subtle UI feedback
+- Zero visual noise
+![Dashboard](./images/dashboard.png)
 
 ---
 
@@ -44,52 +87,24 @@ Probably **not** ideal if you:
 
 ---
 
-## 📁 Structure
+## 🧱 Plugin Overview
 
-```text
- .config/nvim
-├──  ftplugin
-│   ├──  markdown.lua
-│   └──  python.lua
-├──  init.lua
-├──  lazy-lock.json
-├──  lua
-│   └──  jonatas
-│       ├──  config
-│       │   ├──  autocmds.lua
-│       │   ├──  keymaps.lua
-│       │   ├──  lazy.lua
-│       │   ├──  options.lua
-│       │   └──  small-settings.lua
-│       └──  plugins
-│           ├──  blink-cmp.lua
-│           ├──  colorizer.lua
-│           ├──  colorschemes.lua
-│           ├──  conform.lua
-│           ├──  flash.lua
-│           ├──  gitsigns.lua
-│           ├──  image-nvim.lua
-│           ├──  jupytext.lua
-│           ├──  lualine.lua
-│           ├──  luasnip.lua
-│           ├──  mason.lua
-│           ├──  mini-plugins.lua
-│           ├──  molten.lua
-│           ├──  noice.lua
-│           ├──  nvim-treesitter.lua
-│           ├──  oil.lua
-│           ├──  persistence.lua
-│           ├──  quarto-nvim.lua
-│           ├──  snacks.lua
-│           ├──  todo-comments.lua
-│           ├──  trouble.lua
-│           └──  which-key.lua
-└──  snippets
-    ├──  python.lua
-    └──  toml.lua
-```
-
-Each file has **one clear responsibility**.                 
+| Area | Plugin |
+|------|--------|
+| File Explorer | `oil.nvim` |
+| Fuzzy Finder | `snacks.nvim` |
+| Completion | `blink.cmp` |
+| Snippets | `LuaSnip` |
+| LSP | `nvim-lspconfig` |
+| Formatting | `conform.nvim` |
+| Diagnostics | `trouble.nvim` |
+| Syntax | `nvim-treesitter` |
+| Jupyter | `molten.nvim` |
+| Quarto | `quarto-nvim` |
+| Sessions | `persistence.nvim` |
+| UI / UX | `noice.nvim`, `notify`, `colorizer` |
+| Navigation | `flash.nvim` |
+| Git | `lazygit` ( via snacks ) |
 
 ---
 
@@ -99,16 +114,112 @@ Each file has **one clear responsibility**.
 
 Semantic prefixes are used:
 
-* `<leader>a`  tabs
-* `<leader>s`  splits
-* `<leader>p`  sessions
-* `<leader>q`  quarto
-* `<leader>m`  molten
-* `<leader>t`  exit actions
+### Semantic prefixes
+
+| Prefix | Meaning |
+|------|--------|
+| `<leader>a` | Tabs |
+| `<leader>b` | Buffers |
+| `<leader>g` | Git |
+| `<leader>n` | Noice |
+| `<leader>r` | Run |
+| `<leader>s` | Search / Splits |
+| `<leader>x` | Diagnostics |
+| `<leader>p` | Sessions |
+| `<leader>q` | Quarto |
+| `<leader>m` | Molten |
+| `<leader>t` | Exit / Quit |
+
+---
+## 🚀 Keymaps Overview
+
+### Navigation ( Flash )
+
+| Key | Action |
+|-----|--------|
+| `s` | Jump ( Flash ) |
+| `S` | Treesitter jump |
+| `r` | Remote jump |
+| `R` | Treesitter search |
+| `<C-s>` | Toggle Flash in search |
 
 ---
 
-## 🪟 Window Navigation
+### Search / Pickers ( Snacks )
+
+| Key | Action |
+|------|--------|
+| `<leader>ff` | Find files |
+| `<leader>fc` | Find config files |
+| `<leader>sg` | Live grep |
+| `<leader>sw` | Search word / selection |
+| `<leader>bb` | Buffers |
+| `<leader>sm` | Marks |
+| `<leader>fh` | Help |
+| `<leader>si` | Icons |
+| `<leader>fP` | Projects |
+
+---
+
+### Files & Buffers
+
+| Key | Action |
+|------|--------|
+| `<leader>bd` | Delete buffer |
+| `<leader>rn` | Rename file |
+| `<leader>/` | Toggle terminal |
+
+---
+
+### LSP / Diagnostics
+
+| Key | Action |
+|------|--------|
+| `<leader>xx` | Diagnostics ( project ) |
+| `<leader>xb` | Diagnostics ( buffer ) |
+| `<leader>xs` | Symbols |
+
+---
+
+### Jupyter / Quarto
+
+| Key | Action |
+|------|--------|
+| `qh` | Hover |
+| `qd` | Go to definition |
+| `qf` | Format |
+| `qR` | References |
+| `qr` | Rename |
+
+Execution is handled by **Molten**, integrated with Quarto.
+
+---
+
+### Snippets ( LuaSnip )
+
+| Key | Action |
+|------|--------|
+| `<A-u>` | Expand snippet |
+| `<A-j>` | Next field |
+| `<A-k>` | Previous field |
+| `<A-l>` | Change choice |
+
+---
+
+### File Explorer ( Oil )
+
+| Key | Action |
+|------|--------|
+| `l` | Open |
+| `h` | Parent directory |
+| `g.` | Toggle hidden files |
+| `gx` | Open externally |
+| `<C-s>` | Vertical split |
+| `<C-h>` | Horizontal split |
+
+---
+
+### Window Navigation
 
 > **Important:** window navigation uses **ALT + SHIFT + hjkl**
 
@@ -123,8 +234,6 @@ Works in **Normal and Insert Mode**.
 
 ---
 
-## 📜 Cheat Sheet
-
 ### Insert Mode
 
 | Key              | Action                     |
@@ -138,10 +247,10 @@ Works in **Normal and Insert Mode**.
 
 | Key              | Action                           |
 | ---------------- | -------------------------------- |
-| `J / K` (visual) | Move selection down / up         |
-| `J` (normal)     | Join lines without moving cursor |
-| `Ctrl + d / u`   | Half page down / up (centered)   |
-| `n / N`          | Search next / prev (centered)    |
+| `J / K` ( visual ) | Move selection down / up         |
+| `J` ( normal )     | Join lines without moving cursor |
+| `Ctrl + d / u`   | Half page down / up ( centered )   |
+| `n / N`          | Search next / prev ( centered )    |
 
 ---
 
@@ -151,7 +260,7 @@ Works in **Normal and Insert Mode**.
 | ------------ | ---------------------------------- |
 | `<leader>d`  | Delete without yanking             |
 | `x`          | Delete char without yanking        |
-| `<leader>rw` | Replace word under cursor (global) |
+| `<leader>rw` | Replace word under cursor ( global ) |
 | `<leader>h`  | Clear search highlight             |
 
 ---
@@ -160,7 +269,7 @@ Works in **Normal and Insert Mode**.
 
 | Key         | Action               |
 | ----------- | -------------------- |
-| `<leader>x` | Make file executable |
+| `<leader>xc` | Make file executable |
 | `Ctrl + a`  | Select all           |
 
 ---
@@ -174,6 +283,9 @@ Works in **Normal and Insert Mode**.
 | `<leader>an` | Next tab                     |
 | `<leader>ap` | Previous tab                 |
 | `<leader>ac` | Open current file in new tab |
+| `<leader>as` | Move tab left ( wrap )         |
+| `<leader>ad` | Move tab right ( wrap )        |
+| `<leader>1-9` | Go to tab 1-9               |
 
 ---
 
@@ -189,7 +301,7 @@ Works in **Normal and Insert Mode**.
 
 | Key          | Action              |
 | ------------ | ------------------- |
-| `<leader>pl` | Load session (cwd)  |
+| `<leader>pl` | Load session ( cwd )  |
 | `<leader>ps` | Select session      |
 | `<leader>pL` | Load last session   |
 | `<leader>pd` | Stop saving session |
@@ -200,9 +312,9 @@ Works in **Normal and Insert Mode**.
 
 | Key          | Action                     |
 | ------------ | -------------------------- |
-| `<leader>pr` | Run current Python file    |
-| `<leader>mr` | Run current Markdown file  |
-| `<leader>fr` | Format buffer (LSP / Ruff) |
+| `<leader>rp` | Run current Python file    |
+| `<leader>rm` | Run current Markdown file  |
+| `<leader>fr` | Format buffer ( LSP / Ruff ) |
 
 ---
 
@@ -210,8 +322,8 @@ Works in **Normal and Insert Mode**.
 
 | Key         | Action                 |
 | ----------- | ---------------------- |
-| `-`         | Oil (parent directory) |
-| `<leader>-` | Oil (floating)         |
+| `-`         | Oil ( parent directory ) |
+| `<leader>-` | Oil ( floating )         |
 | `<leader>=` | MiniFiles              |
 
 ---
@@ -224,7 +336,6 @@ Works in **Normal and Insert Mode**.
 | `<leader>qc`          | Run cell           |
 | `<leader>qa`          | Run cell and above |
 | `<leader>ql`          | Run line           |
-| `<leader>qs` (visual) | Run selection      |
 | `<leader>qA`          | Run all cells      |
 
 ---
@@ -235,16 +346,74 @@ Works in **Normal and Insert Mode**.
 | ------------ | ------------------ |
 | `<leader>mi` | Initialize kernel  |
 | `<leader>mc` | Evaluate cell      |
-| `<leader>mv` | Evaluate selection |
+| `<leader>ml` | Evaluate line      |
 | `<leader>mo` | Open output window |
 | `<leader>mh` | Hide output        |
 | `<leader>md` | Delete cell        |
+| `<leader>mn` | Go to next cell    |
+| `<leader>mp` | Go to prev cell    |
+
+---
+
+# ⚙️ Installation Guide
+
+This guide explains how to install **all required dependencies** and set up this Neovim configuration properly.
+
+## 🐧 Supported Systems
+
+- ✅ Arch Linux ( primary target )
+- 🟡 Other Linux distros ( may require adjustments )
+- ⚠️ macOS / Windows ( not officially supported )
+
+---
+
+## 📦 Installation ( Recommended )
+
+This setup uses a **shell script** to automate setup.
+
+### 🔽 Download only the installer ( without cloning the repo )
+
+> **WARNING ⚠️** This script was created to work only on pure Arch-based distributions.
+Other distros must adapt package manager commands.
+Download the install.sh file using wget or curl:
+
+```bash
+wget https://raw.githubusercontent.com/jonatas2santos/My-Neovim/refs/heads/master/install.sh
+```
+or
+```bash
+curl -LO https://raw.githubusercontent.com/jonatas2santos/My-Neovim/refs/heads/master/install.sh
+```
+
+then give executable permission to file ( chmod u+x install.sh ) and run it ( ./install.sh ).
+
+## ✅ Final Checklist
+
+- [ ] Neovim ≥ 0.10
+
+- [ ] Nerd Font installed
+
+- [ ] Python + pip installed
+
+- [ ] ripgrep, fd, imagemagick installed
+
+- [ ] Plugins installed via Lazy
+
+- [ ] Treesitter parsers installed
+
+- [ ] Molten working
 
 ---
 
 ## ☝️🤓 Final Notes
 
-This configuration evolves through real, everyday usage.
+> This setup is not about doing everything.  
+It's about doing **exactly what I need**, clearly and efficiently.
+
+- Designed for **Arch Linux**
+- Works best with a Nerd Font
+- Keyboard-driven workflow
+- Continuously evolving
 
 It is a personal setup, shaped by how I like to work — not an attempt to build the “best” Neovim configuration, nor the most productive one by any universal standard.
 

@@ -1,6 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-mini/mini.icons', opts = {} },
+  dependencies = 'nvim-mini/mini.icons',
   opts = function ()
     -- Custom highlight for the clock component
     vim.api.nvim_set_hl(0, 'Clock_Color', {
@@ -16,47 +16,55 @@ return {
         local icon = (hour < 16) and '' or ''
         return string.format('%s %02d:%02d', icon, hour, now.min)
       end,
-      color = "Clock_Color",
+      color = 'Clock_Color',
       separator = { left = '', right = '' },
       padding = 1,
     }
 
+    -- Safe noice integration
+    local noice_ok, noice = pcall(require, 'noice')
+
     return {
-    options = {
-      theme = 'oxocarbon',
-      component_separators = '',
-      section_separators = { left = '', right = '' },
-    },
-    sections = {
-      lualine_a = { 'mode' },
-      lualine_b = { 'branch', 'diff', 'diagnostics' },
-      lualine_c = { 'filename',
-          -- Show active macro recording
+      options = {
+        theme = 'oxocarbon',
+        component_separators = '',
+        section_separators = { left = '', right = '' },
+      },
+
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff' },
+        lualine_c = { 'filename',
+        -- Macro recording indicator
         function()
           local reg = vim.fn.reg_recording()
           if reg == '' then
-              return ''
-            end
+            return ''
+          end
           return 'recording macro @' .. reg
         end,
       },
       lualine_x = {
-          -- Lazy updates status
+        -- Lazy updates status
         {
           require('lazy.status').updates,
           cond = require('lazy.status').has_updates,
-          color = { fg = '#ff9e64' }
+          color = { fg = '#ff9e64' },
         },
+        -- Noice command status
         {
-            -- Noice command status
-          require('noice').api.status.command.get,
-          cond = require('noice').api.status.command.has,
+          function ()
+            return noice.api.status.command.get()
+          end,
+          cond = function ()
+            return noice_ok and noice.api.status.command.has()
+          end,
           color = { fg = '#78a9ff' },
         },
         'filetype' },
-      lualine_y = { 'location' },
-      lualine_z = { clock_kiki }
-    },
-  }
+        lualine_y = { 'location' },
+        lualine_z = { clock_kiki },
+      },
+    }
   end,
 }

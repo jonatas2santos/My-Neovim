@@ -1,25 +1,42 @@
 return {
-  "folke/which-key.nvim",
-  event = "VeryLazy",
+  'folke/which-key.nvim',
+  event = 'VeryLazy',
   opts = {
-    preset = "helix",
+    preset = 'helix',
     delay = 500,
+    -- Minimal UI (no key icons)
     icons = { mappings = false },
     spec = {
       { '<leader>f', group = 'Find' },
-      { '<leader>s', group = 'Search' },
+      { '<leader>s', group = 'Search / Split' },
       { '<leader>g', group = 'Git' },
-      { '<leader>x', group = 'Diagnostics / Trouble' },
       { '<leader>b', group = 'Buffers' },
+      { '<leader>x', group = 'Diagnostics / Trouble' },
+
+      -- Workflow / sessions
+      { '<leader>p', group = 'Persistence' },
+      { '<leader>t', group = 'Session / Exit' },
+
+      -- Navigation / structure
+      { '<leader>a', group = 'Tabs' },
+      { '<leader>c', group = 'Change directory' },
+
+      -- Dev / execution
+      { '<leader>r', group = 'Run / Replace' },
+      { '<leader>m', group = 'Molten' },
+      { '<leader>q', group = 'Quarto' },
+
+      -- UI
+      { '<leader>n', group = 'Noice' },
     },
   },
   keys = {
     {
-      "<leader>?",
+      '<leader>?',
       function()
-        require("which-key").show({ global = false })
+        require('which-key').show({ global = false })
       end,
-      desc = "Buffer Local Keymaps (which-key)",
+      desc = 'Buffer Local Keymaps (which-key)',
     },
   },
 }
