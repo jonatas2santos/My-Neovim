@@ -11,6 +11,10 @@ section () {
   echo
 }
 
+section "Please enter your sudo password to install required packages via pacman..."
+sudo -v
+echo
+
 section "Creating runtime directory and setting permissions..."
 sleep 5
 jupyter kernelspec remove datascience -f 2>/dev/null || true
@@ -22,10 +26,6 @@ echo
 
 section "Starting Neovim setup installation..."
 sleep 5
-echo
-
-section "Please enter your sudo password to install required packages via pacman..."
-sudo -v
 echo
 
 section "Installing required system packages..."
@@ -131,7 +131,7 @@ echo
 
 section "Final step"
 echo "Open Neovim and wait for Lazy to install all plugins."
-echo "After that, run :UpdateRemotePlugins"
+echo "After that, run :Lazy sync & :UpdateRemotePlugins"
 echo "Then close Neovim and this terminal."
 sleep 3
 echo
