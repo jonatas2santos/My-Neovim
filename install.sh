@@ -29,6 +29,7 @@ sleep 5
 echo
 
 section "Installing required system packages..."
+sleep 2
 sudo pacman -S --needed --noconfirm \
   neovim \
   git \
@@ -75,6 +76,7 @@ echo "Virtual environment created successfully!!"
 echo
 
 section "Installing Python libraries into the virtual environment..."
+sleep 5
 pip install --upgrade pip 
 pip install \
   pandas \
@@ -105,7 +107,7 @@ VENV_PY="$(pwd)/.venv/bin/python"
 
 echo
 section "Kernel successfully installed!!"
-sleep 5
+sleep 3
 echo
 
 section "Backing up existing Neovim configuration..."
@@ -131,7 +133,7 @@ echo
 
 section "Final step"
 echo "Open Neovim and wait for Lazy to install all plugins."
-echo "After that, run :Lazy sync & :UpdateRemotePlugins"
+echo "After that, run :Lazy update & :UpdateRemotePlugins"
 echo "Then close Neovim and this terminal."
 sleep 3
 echo

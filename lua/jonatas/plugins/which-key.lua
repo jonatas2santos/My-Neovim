@@ -28,6 +28,10 @@ return {
 
       -- UI
       { '<leader>n', group = 'Noice' },
+
+      -- Others
+      { '<leader>l', group = 'LazyGit' },
+      { '<leader>u', group = 'Undo' },
     },
   },
   keys = {

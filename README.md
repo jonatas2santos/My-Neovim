@@ -378,11 +378,16 @@ Other distros must adapt package manager commands.
 Download the install.sh file using wget or curl:
 
 ```bash
-wget https://raw.githubusercontent.com/jonatas2santos/My-Neovim/refs/heads/master/install.sh || chmod u+x install.sh || ./install.sh
+wget https://raw.githubusercontent.com/jonatas2santos/My-Neovim/refs/heads/master/install.sh && chmod u+x install.sh && ./install.sh
 ```
 or
 ```bash
-curl -LO https://raw.githubusercontent.com/jonatas2santos/My-Neovim/refs/heads/master/install.sh || chmod u+x install.sh || ./install.sh
+curl -LO https://raw.githubusercontent.com/jonatas2santos/My-Neovim/refs/heads/master/install.sh && chmod u+x install.sh && ./install.sh
+```
+
+### ❌ Uninstall
+```bash
+if [[ -d ~/.config/OLDnvim ]]; then clear && rm -rf ~/.config/nvim && mv ~/.config/OLDnvim ~/.config/nvim && echo "✔ Neovim config restored"; else clear && echo "✘ No Backup was found... No action was taken."; fi
 ```
 
 ## ✅ Final Checklist
