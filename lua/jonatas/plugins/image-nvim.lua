@@ -11,6 +11,9 @@ return {
       -- Enable image rendering inside Markdown files
       markdown = {
         enabled = true,
+        only_render_image_at_cursor = true,
+        only_render_image_at_cursor_mode = 'inline',
+        floating_windows = true,
       },
       -- Disable Neorg integration (not used in this setup)
       neorg = {

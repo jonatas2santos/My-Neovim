@@ -122,7 +122,7 @@ cd ~/.config/
 git clone https://github.com/jonatas2santos/My-Neovim.git
 mv My-Neovim nvim
 cd nvim
-rm -rf README.md install.sh
+rm -rf images README.md install.sh
 if [[ -d .git ]] then
   rm -rf .git
 fi

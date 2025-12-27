@@ -26,6 +26,7 @@ This is not a Neovim distro - it is a **PERSONAL WORKBENCH**.
 - Smart indentation
 - Fast structural navigation ( Flash )
 - Modern motions without breaking Vim habits
+![Neovim](./images/nvim.gif)
 
 ### 🧪 Data Science Workflow
 - Native Jupyter-style workflow via **Molten**
@@ -33,17 +34,38 @@ This is not a Neovim distro - it is a **PERSONAL WORKBENCH**.
 - Inline outputs and plots
 - Ruff for linting, formatting and imports
 - Quarto integration for reproducible research
+- Cell highlight
+![Notebook Code](./images/notebook-code.png)
+![Notebook Output](./images/notebook-output.png)
+
+### 🚨 Diagnostics & Troubleshooting
+- Centralized diagnostics view
+- Project-wide and buffer-specific errors
+- Clear severity indicators
+- Quick navigation between issues
+- Clean and focused error display
+![Trouble Diagnostics](./images/trouble.png)
 
 ### 🔍 Search & Navigation
 - `snacks.nvim` as the main picker
 - Fast fuzzy search
 - Project-aware navigation
+![Snacks Picker](./images/snacks-picker.png)
+
+### 📁 File Management
+- Fast and intuitive file navigation
+- Minimal, distraction-free file explorer
+- Seamless integration with buffers and tabs
+- External file opening support
+- Safe file operations (rename, delete, move)
+![Oil File Explorer](./images/oil.png)
 
 ### 🎨 UI / UX
 - Clean dashboard
 - Minimal notifications
 - Subtle UI feedback
 - Zero visual noise
+![Dashboard](./images/dashboard.png)
 
 ---
 
