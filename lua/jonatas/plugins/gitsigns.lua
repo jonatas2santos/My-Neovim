@@ -64,7 +64,7 @@ return {
 
 
       -- Toggle inline blame
-      map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = 'toggle git blame' })
+      map('n', '<leader>gB', gitsigns.toggle_current_line_blame, { desc = 'toggle git blame' })
 
       -- Git hunk text object
       -- Allows selecting a hunk in operator-pending or visual mode

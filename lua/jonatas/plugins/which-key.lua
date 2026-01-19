@@ -15,7 +15,7 @@ return {
 
       -- Workflow / sessions
       { '<leader>p', group = 'Persistence' },
-      { '<leader>t', group = 'Session / Exit' },
+      { '<leader>t', group = 'Exit' },
 
       -- Navigation / structure
       { '<leader>a', group = 'Tabs' },
@@ -24,13 +24,13 @@ return {
       -- Dev / execution
       { '<leader>r', group = 'Run / Replace' },
       { '<leader>m', group = 'Molten' },
-      { '<leader>q', group = 'Quarto' },
+      { '<leader>q', group = 'Home / Quarto' },
 
       -- UI
       { '<leader>n', group = 'Noice' },
 
       -- Others
-      { '<leader>l', group = 'LazyGit' },
+      { '<leader>l', group = 'LazyGit / List' },
       { '<leader>u', group = 'Undo' },
     },
   },

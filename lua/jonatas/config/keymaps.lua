@@ -7,6 +7,13 @@ local vks = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 --------------------------------------
+-- RETURN TO DASHBOARD
+--------------------------------------
+vks('n', '<LEADER>qq', function ()
+  require('snacks').dashboard.open()
+end, { desc = 'back to dashboard' })
+
+--------------------------------------
 -- INSERT MODE - Cursor movement
 --------------------------------------
 vks('i', '<C-h>', '<C-o>h')
@@ -57,6 +64,8 @@ vks('n', '<LEADER>rw', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<LEFT><LEFT><LEFT>]],
 -- Clear search highlights
 vks('n', '<LEADER>h', '<CMD>nohl<CR>', { desc = 'clear search hl', silent = true })
 
+-- Organize numbered list
+vks('n', '<LEADER>ln', 'vip:norm I0. <CR>gvg<C-a>', { desc = 'numbered list' })
 ---------------------------
 -- FILE & BUFFER ACTIONS
 ---------------------------
@@ -214,6 +223,13 @@ for i = 1, 9 do
     require('bufferline').go_to(i, true)
   end, { desc = 'go to tab ' .. i })
 end
+
+--------------------------------------------
+-- SNACKS ( colorscheme )
+--------------------------------------------
+vks('n', '<LEADER>sC', function ()
+  require('jonatas.config.pickercolorscheme').picker()
+end, { desc = 'change Colorscheme' })
 
 ------------
 -- QUARTO

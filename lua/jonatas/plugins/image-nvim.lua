@@ -3,7 +3,7 @@ return {
   build = false,
   opts = {
     -- Best backend for Wayland environments
-    backend = 'ueberzug',
+    backend = 'kitty',
     -- Use ImageMagick CLI for image processing
     processor = 'magick_cli',
 

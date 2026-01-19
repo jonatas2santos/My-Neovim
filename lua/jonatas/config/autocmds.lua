@@ -6,14 +6,14 @@
 vim.keymap.set('n', '<LEADER>fp', function()
   local file_path = vim.fn.expand( '%:~' )
   vim.fn.setreg( '+', file_path )
-  print( 'file path copied to clipboard: ' .. file_path )
+  print( 'File path copied to clipboard: ' .. file_path )
 end, { desc = 'copy file path to clipboard' })
 
 -- Highlight text on yank
 local yank_group = vim.api.nvim_create_augroup( 'highlight_yank', { clear = true })
 vim.api.nvim_create_autocmd( 'TextYankPost', {
   group = yank_group,
-  desc = 'highlight when yanking text',
+  desc = 'highlight text when yanking',
   callback = function()
     vim.highlight.on_yank()
   end,
@@ -31,7 +31,7 @@ vim.api.nvim_create_autocmd( 'FileType', {
 vim.api.nvim_create_autocmd( 'FileType', {
   pattern = 'help',
   callback = function()
-    vim.keymap.set('n', 'q', '<cmd>quit<CR>', { buffer = true, silent = true })
+    vim.keymap.set('n', 'q', '<CMD>quit<CR>', { buffer = true, silent = true })
   end,
 })
 
@@ -69,8 +69,10 @@ vim.api.nvim_create_autocmd({ 'WinLeave', 'BufLeave' }, {
 
 -- Sync working directory with Oil
 vim.api.nvim_create_autocmd( 'BufEnter', {
-  pattern = 'oil://*',
-  callback = function()
+  callback = function ()
+    if vim.bo.filetype ~= 'oil' then
+      return
+    end
     local dir = require('oil').get_current_dir()
     if dir then
       vim.cmd.lcd(dir)
@@ -81,7 +83,12 @@ vim.api.nvim_create_autocmd( 'BufEnter', {
 -- Auto-create missing directories on save
 vim.api.nvim_create_autocmd( 'BufWritePre', {
   callback = function()
-    local dir = vim.fn.expand('<afile>:p:h')
+    local file = vim.api.nvim_buf_get_name(0)
+    -- Ignore virtual buffers ( oil, term, etc )
+    if file == '' or file:match('^%w+://') then
+      return
+    end
+    local dir = vim.fn.fnamemodify(file, ':p:h')
     if vim.fn.isdirectory(dir) == 0 then
       vim.fn.mkdir(dir, 'p')
     end

@@ -49,7 +49,7 @@ op.cb:append('unnamedplus')          -- use system clipboard
 op.mouse = 'nv'                      -- enable mouse in normal and visual mode
 
 -- Cursor and wrapping
-op.gcr = ''                          -- block cursor in all modes
+op.gcr = 'a:block'                   -- block cursor in all modes
 op.wrap = false                      -- disable line wrapping
 
 -- Colors

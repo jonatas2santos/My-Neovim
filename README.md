@@ -158,6 +158,8 @@ Semantic prefixes are used:
 | `<leader>fh` | Help |
 | `<leader>si` | Icons |
 | `<leader>fP` | Projects |
+| `<leader>sC` | Change Colorscheme |
+| `<leader>qq` | Back to Dashboard |
 
 ---
 
@@ -262,6 +264,7 @@ Works in **Normal and Insert Mode**.
 | `x`          | Delete char without yanking        |
 | `<leader>rw` | Replace word under cursor ( global ) |
 | `<leader>h`  | Clear search highlight             |
+| `<leader>ln`  | Organize numbered list |
 
 ---
 
