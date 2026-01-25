@@ -61,7 +61,7 @@ function M.build()
       return data.hl
     end,
 
-    separator = { left = '', right = '' },
+    separator = { left = '', right = '' },
     padding = 1,
   }
 
@@ -74,7 +74,7 @@ function M.build()
       return string.format('%s %02d:%02d', icon, hour, now.min)
     end,
     color = 'Clock_Color',
-    separator = { left = '', right = '' },
+    separator = { left = '', right = '' },
     padding = 1,
   }
 
@@ -83,16 +83,17 @@ function M.build()
 
   return {
     options = {
+      globalstatus = true,
       theme = 'auto',
       component_separators = '',
-      section_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
+      -- section_separators = { left = '', right = '' },
       -- section_separators = { left = '', right = '' },
     },
 
     sections = {
-      lualine_a = { mode_kiki },
-      lualine_b = { 'branch', 'diff' },
-      lualine_c = { 'filename',
+      lualine_a = {
+        mode_kiki,
       -- Macro recording indicator
       function()
         local reg = vim.fn.reg_recording()
@@ -101,7 +102,9 @@ function M.build()
         end
         return 'recording macro @' .. reg
       end,
-    },
+      },
+      lualine_b = { 'branch', 'diff' },
+      lualine_c = { 'filename' },
     lualine_x = {
       -- Lazy updates status
       {
